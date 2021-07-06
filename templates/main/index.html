@@ -1,0 +1,71 @@
+{% extends "base.html" %} 
+
+{% block content %}
+
+<p id="demo">Click the button to change the text in this paragraph.</p>
+
+<div class="row mt-4">
+    <div class="col">
+        <h2 class="mb-4">Add an Credential</h2>
+        <form  action="add_credential/" method="post">
+            <div>
+                <input type="text" required name="site" class="form-control mb-4 mr-sm-2" placeholder="Site Name..">
+            </div>
+            
+            <div>
+                <input type="text" required name="uid" class="form-control mb-4 mr-sm-2" placeholder="Site User Id..">
+            </div>
+            <div>
+                <input type="text" required name="password" class="form-control mb-4 mr-sm-2" placeholder="Site Password..">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+
+        </form>
+    </div>
+</div>
+<div id="01">
+
+</div>
+<div class="row mt-4">
+    <div class="col">
+        <ul class="list-group">
+            {% for credential_item in credential_items %}
+                 <li class="list-group-item">
+                    
+                    <div class="container">
+                        <div class="row">
+                            <button type="button" class="btn btn-primary mb-4 ml-4">{{ credential_item.Site_Name }}</button>
+                         </div>
+                         <div class="row">
+                                Username:
+                                <button type="button" class="btn btn-warning mb-4 ml-4">
+                                   <span id="Slice_String">{{ credential_item.UID}}</span>  <span class="badge bg-light">copy</span>
+                                </button> 
+                         </div>
+                         
+                        <div class="row">
+                            Pass-word:
+                                <button type="button" class="btn btn btn-danger mb-4 ml-4">
+                                    {{ credential_item.Password }} <span class="badge bg-secondary">copy</span>
+                                </button>
+                        </div>
+                        <form action="delete_credential/{{ credential_item.id }}/" method="post">
+                            <button type="submit" class="btn btn-block btn-dark">Delete</button>
+                            
+                        </form>  
+                         
+                    </div>
+                         
+                             
+                    
+                     
+                    
+                     
+                 </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+    
+
+{% endblock content %}
